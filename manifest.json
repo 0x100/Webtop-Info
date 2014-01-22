@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,  
-  "name": "Webtob Info",
+  "name": "Webtop Info",
   "version": "1.0",
   
   "permissions": [
@@ -8,7 +8,7 @@
     "<all_urls>"
   ],  
   "background": {
-        "scripts": ["background.js"]
+        "scripts": ["js/background.js"]
   },
   "minimum_chrome_version": "17",
   "browser_action": {
