@@ -5,7 +5,8 @@
   
   "permissions": [
     "webRequest",
-    "<all_urls>"
+    "<all_urls>",
+    "activeTab"
   ],  
   "background": {
         "scripts": ["js/background.js"]
@@ -20,5 +21,11 @@
         "48": "images/48.png",
         "64": "images/64.png",
         "128": "images/128.png"
-   }
+   },
+   "content_scripts": [{
+        "matches": ["<all_urls>"],
+        "js": ["js/content.js"],
+        "run_at": "document_start",
+        "all_frames": true
+    }]
 }
