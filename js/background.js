@@ -1,4 +1,4 @@
-var callback = function(details) { 
+var onBeforeRequestCallback = function(details) { 
 
 if(details.method == 'POST') {
   var requestBody = details.requestBody;
@@ -50,4 +50,11 @@ if(details.method == 'POST') {
   }
 }};
 
-chrome.webRequest.onBeforeRequest.addListener(callback, {urls: ["<all_urls>"]}, ["requestBody"]);
+var onMessageCallback = function (message, sender, sendResponse) {
+    if (message.method == "saveValue") {
+        localStorage[message.key] = message.value;
+    }
+};
+
+chrome.webRequest.onBeforeRequest.addListener(onBeforeRequestCallback, {urls: ["<all_urls>"]}, ["requestBody"]);
+chrome.runtime.onMessage.addListener(onMessageCallback);

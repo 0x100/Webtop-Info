@@ -49,21 +49,27 @@ function updateText() {
     var callerName = localStorage["callerName"];
     var docType = localStorage["docType"];  
     var isNew = localStorage["isNew"] && localStorage["isNew"] == 1;
+    var containerName = localStorage["containerName"];      
     
     var pnlObjectId = $("#pnlObjectId");
-    var pnlDetails = $("#pnlDetails");  
+    var pnlDetails = $("#pnlDetails");
   
     var textColor = isNew ? 'black' : 'gray'; 
     var vStyle = 'style="color: ' + (isNew ? 'gray' : 'lightgray') + ';"';  
     var detail = '{0}: <span ' + vStyle + '>{1}</span></br>';
       
-    var details = (callerName ? detail.format(['{0}', '{1}']) : '')
-                + (docType    ? detail.format(['{2}', '{3}']) : '')
-                + (url        ? detail.format(['{4}', '{5}']) : '');
+    var details = (containerName ? detail.format(['{0}', '{1}']) : '')
+                + (callerName    ? detail.format(['{2}', '{3}']) : '')
+                + (docType       ? detail.format(['{4}', '{5}']) : '')
+                + (url           ? detail.format(['{6}', '{7}']) : '');
+                
+                console.log(url);
+                console.log(details);
                            
-    details = details.format(['Caller component', callerName, 
-                              'Type',             docType, 
-                              'URL',              url,
+    details = details.format(['Container', containerName, 
+                              'Caller',    callerName, 
+                              'Type',      docType, 
+                              'URL',       url,
                              ])                                 
     pnlDetails.css('color', textColor);  
     pnlDetails.html(details);
@@ -80,6 +86,7 @@ function onClear() {
     localStorage.removeItem("callerName");
     localStorage.removeItem("docType"); 
     localStorage.removeItem("isNew");  
+    localStorage.removeItem("containerName");  
     
     if(!pnlDetails.is(':hidden')) {
         hideDetails();
